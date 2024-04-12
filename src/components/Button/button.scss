@@ -1,0 +1,32 @@
+[class^="b-button_"] {
+  display: block;
+  padding: 15px 30px;
+  border: 1px solid var(--main-color);  background: var(--main-color);
+  font-size: clamp(14px, 1.1vw, 18px);
+  color: #ffffff;
+  font-weight: 800;
+  border-radius: 55px;
+  box-shadow: 0 3px 12px 0 rgba($color: #4A3AFF, $alpha: 0.18);
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+
+  &:hover {
+    box-shadow: 0 3px 18px 0 rgba($color: #4A3AFF, $alpha: 0.80);
+    transition: box-shadow 0.3s;
+  }
+
+  &.b-button_previous {
+    background: #ffffff;
+    color: var(--main-color);
+    font-weight: 400;
+  }
+
+  &.b-button_next {
+    margin-left: auto;
+  }
+  &.error {
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
+}
+
