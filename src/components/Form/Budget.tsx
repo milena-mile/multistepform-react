@@ -3,7 +3,7 @@ import RadioButton from "../RadioButton/RadioButton.tsx";
 import {FormSteps} from "./types.ts";
 
 const Budget: React.FC<FormSteps> = ({handleChange, data}) => {
-    const [selected, setSelected] = useState(data!["budget"] ?? "$5.000 - $10.000");
+    const [selected, setSelected] = useState(data["budget"]);
 
     const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = event.target;

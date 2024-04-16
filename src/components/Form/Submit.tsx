@@ -1,4 +1,5 @@
-const Submit = (props: { disabled: boolean }) => {
+const Submit = (props: { formAction: string }) => {
+    console.log(props.formAction);
     return (
         <div className="b-form_step b-submit">
             <div className="b-submit_image-wrapper">
@@ -7,9 +8,10 @@ const Submit = (props: { disabled: boolean }) => {
             <h2 className="b-form_step-title">Submit your quote request</h2>
             <p className="b-form_step-description">Please review all the information you previously typed in the past steps, and if all is okay, submit your message to receive a project quote in 24 - 48 hours.</p>
             <input className="b-button_submit"
-                   value={props.disabled ? "Submitting..." : "Submit"}
+                   value={props.formAction === "loading" ? "Submitting..." : "Submit"}
                    type="submit"
-                   disabled={props.disabled}/>
+                   disabled={props.formAction === "loading"}/>
+            {props.formAction === "sent" ? <span className='b-form_message'>Form has been sent!</span> : ''}
         </div>
     )
 }

@@ -2,17 +2,28 @@ import React from "react";
 import Checkbox from "../Checkbox/Checkbox.tsx";
 import {FormSteps} from "./types.ts";
 
-const res: string[] = [];
+
 const Services: React.FC<FormSteps> = ({handleChange, data}) => {
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = event.target;
-        if (!res.includes(value)) res.push(value);
-        handleChange(name, res);
+        let services = data[name] as string[];
+        if (services == undefined) services = [];
+
+        if (!services.includes(value)) {
+            services.push(value);
+        } else {
+            const index = services.indexOf(value);
+            if (index !== -1) {
+                services.splice(index, 1);
+            }
+        }
+
+        handleChange(name, services);
     };
 
     const checkIfChecked = (name: string, text: string) => {
-        if (data![name]) {
-            return data![name].includes(text);
+        if (data[name]) {
+            return data[name].includes(text);
         } else {
             return false;
         }

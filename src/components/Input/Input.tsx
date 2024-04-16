@@ -64,7 +64,7 @@ const Input: React.FC<IInput> = ({type, name, data, icon, placeholder, onChange}
                 name={name}
                 onChange={handleInputChange}
                 onBlur={validateInput}/>
-            <img className="b-form_icon" src={`/images/${icon}`} alt={name}/>
+            <img className="b-form_icon" src={`images/${icon}`} alt={name}/>
             {hasError && <span className="error-message">Invalid input</span>}
         </label>
     )
