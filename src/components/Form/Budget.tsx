@@ -1,14 +1,19 @@
 import React, {useState} from "react";
+import {useDataContext} from "../../contexts/DataContext.tsx";
 import RadioButton from "../RadioButton/RadioButton.tsx";
-import {FormSteps} from "./types.ts";
 
-const Budget: React.FC<FormSteps> = ({handleChange, data}) => {
-    const [selected, setSelected] = useState(data["budget"]);
+const Budget: React.FC = () => {
+    const {formData, setFormData} = useDataContext();
+    const [selected, setSelected] = useState(formData["budget"]);
 
     const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = event.target;
         setSelected(value);
-        handleChange(name, value);
+
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: value
+        }));
     };
 
     return (

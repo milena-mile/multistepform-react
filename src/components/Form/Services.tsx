@@ -1,12 +1,12 @@
 import React from "react";
+import {useDataContext} from "../../contexts/DataContext.tsx";
 import Checkbox from "../Checkbox/Checkbox.tsx";
-import {FormSteps} from "./types.ts";
 
-
-const Services: React.FC<FormSteps> = ({handleChange, data}) => {
+const Services: React.FC = () => {
+    const {formData, setFormData} = useDataContext();
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = event.target;
-        let services = data[name] as string[];
+        let services = formData[name] as string[];
         if (services == undefined) services = [];
 
         if (!services.includes(value)) {
@@ -18,16 +18,11 @@ const Services: React.FC<FormSteps> = ({handleChange, data}) => {
             }
         }
 
-        handleChange(name, services);
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: services
+        }));
     };
-
-    const checkIfChecked = (name: string, text: string) => {
-        if (data[name]) {
-            return data[name].includes(text);
-        } else {
-            return false;
-        }
-    }
 
     return (
         <div className="b-form_step">
@@ -36,22 +31,22 @@ const Services: React.FC<FormSteps> = ({handleChange, data}) => {
             <div className="b-form_inputs">
                 <Checkbox icon={"images/development.svg"}
                           name={"services"}
-                          checked={() => checkIfChecked("services", "Development")}
+                          checked={formData["services"] ? formData["services"].includes("Development") : false}
                           text={"Development"}
                           onChange={handleCheckboxChange}/>
                 <Checkbox icon={"images/web-design.svg"}
                           name={"services"}
-                          checked={() => checkIfChecked("services", "Web Design")}
+                          checked={formData["services"] ? formData["services"].includes("Web Design") : false}
                           text={"Web Design"}
                           onChange={handleCheckboxChange}/>
                 <Checkbox icon={"images/marketing.svg"}
                           name={"services"}
-                          checked={() => checkIfChecked("services", "Marketing")}
+                          checked={formData["services"] ? formData["services"].includes("Marketing") : false}
                           text={"Marketing"}
                           onChange={handleCheckboxChange}/>
                 <Checkbox icon={"images/other.svg"}
                           name={"services"}
-                          checked={() => checkIfChecked("services", "Other")}
+                          checked={formData["services"] ? formData["services"].includes("Other") : false}
                           text={"Other"}
                           onChange={handleCheckboxChange}/>
             </div>

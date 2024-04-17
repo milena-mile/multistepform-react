@@ -7,8 +7,7 @@ interface ContextForm {
 
 const FormContext = createContext<ContextForm>({
     disable: 0,
-    setDisable: () => {
-    }
+    setDisable: () => {}
 });
 
 const useFormContext = () => useContext(FormContext);

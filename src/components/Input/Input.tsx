@@ -1,11 +1,13 @@
 import React, {useState} from "react";
+import {useDataContext} from "../../contexts/DataContext.tsx";
 import {useFormContext} from "../../contexts/FormContext.tsx";
 import {IInput} from "./types.ts";
 
-const Input: React.FC<IInput> = ({type, name, data, icon, placeholder, onChange}) => {
+const Input: React.FC<IInput> = ({type, name, icon, placeholder}) => {
     const {setDisable} = useFormContext();
+    const {formData, setFormData} = useDataContext();
 
-    const [value, setValue] = useState(data[name]);
+    const [value, setValue] = useState(formData[name]);
     const [hasError, setError] = useState(false);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,11 +26,20 @@ const Input: React.FC<IInput> = ({type, name, data, icon, placeholder, onChange}
                 formattedValue = `(${inputValue.slice(0, 3)}) ${inputValue.slice(3, 6)}-${inputValue.slice(6, 10)}`;
             }
 
+            setFormData(prevData => ({
+                ...prevData,
+                [name]: formattedValue
+            }));
             setValue(formattedValue);
         } else {
+
+            setFormData(prevData => ({
+                ...prevData,
+                [name]: event.target.value
+            }));
             setValue(event.target.value);
         }
-        onChange(event);
+
     }
 
     const validateInput = (event: React.ChangeEvent<HTMLInputElement>) => {

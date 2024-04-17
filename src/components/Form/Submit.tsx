@@ -1,5 +1,5 @@
 const Submit = (props: { formAction: string }) => {
-    console.log(props.formAction);
+
     return (
         <div className="b-form_step b-submit">
             <div className="b-submit_image-wrapper">

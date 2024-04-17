@@ -1,5 +1,6 @@
 import "./form.scss";
 import React, {useState} from "react";
+import {useDataContext} from "../../contexts/DataContext.tsx";
 import {useFormContext} from "../../contexts/FormContext.tsx";
 import Budget from "./Budget.tsx";
 import Contact from "./Contact.tsx";
@@ -8,17 +9,10 @@ import Submit from "./Submit.tsx";
 
 const Form = (props: { currentStep: number }) => {
     const {setDisable} = useFormContext();
+    const {formData, setFormData} = useDataContext();
     const step = props.currentStep;
 
     const [formAction, setFormAction] = useState("none");
-    const [formData, setFormData] = useState({});
-
-    const handleChange = (name: string, value: string | string[]) => {
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: value
-        }));
-    };
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
@@ -39,9 +33,9 @@ const Form = (props: { currentStep: number }) => {
     return (
         <section className="b-form_block">
             <form className="b-form" onSubmit={handleSubmit}>
-                {step === 0 && <Contact data={formData} handleChange={handleChange}/>}
-                {step === 1 && <Services data={formData} handleChange={handleChange}/>}
-                {step === 2 && <Budget data={formData} handleChange={handleChange}/>}
+                {step === 0 && <Contact/>}
+                {step === 1 && <Services/>}
+                {step === 2 && <Budget/>}
                 {step === 3 && <Submit formAction={formAction}/>}
             </form>
         </section>

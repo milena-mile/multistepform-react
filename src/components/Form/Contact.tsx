@@ -1,13 +1,7 @@
 import React from "react";
 import Input from "../Input/Input.tsx";
-import {FormSteps} from "./types.ts";
 
-const Contact: React.FC<FormSteps> = ({handleChange, data}) => {
-
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = event.target;
-        handleChange(name, value);
-    };
+const Contact: React.FC = () => {
 
     return (
         <div className="b-form_step">
@@ -16,28 +10,20 @@ const Contact: React.FC<FormSteps> = ({handleChange, data}) => {
             <div className="b-form_inputs">
                 <Input name={"Name"}
                        type={"text"}
-                       data={data}
                        icon={"name.svg"}
-                       placeholder={"John Carter"}
-                       onChange={handleInputChange}/>
+                       placeholder={"John Carter"}/>
                 <Input name={"Email"}
                        type={"email"}
-                       data={data}
                        icon={"mail.svg"}
-                       placeholder={"Email address"}
-                       onChange={handleInputChange}/>
+                       placeholder={"Email address"}/>
                 <Input name={"Phone Number"}
                        type={"tel"}
-                       data={data}
                        icon={"phone.svg"}
-                       placeholder={"(123) 456-7890"}
-                       onChange={handleInputChange}/>
+                       placeholder={"(123) 456-7890"}/>
                 <Input name={"Company"}
                        type={"text"}
-                       data={data}
                        icon={"company.svg"}
-                       placeholder={"Company name"}
-                       onChange={handleInputChange}/>
+                       placeholder={"Company name"}/>
             </div>
         </div>
     )
