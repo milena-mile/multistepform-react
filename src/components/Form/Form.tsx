@@ -6,13 +6,14 @@ import Budget from "./Budget.tsx";
 import Contact from "./Contact.tsx";
 import Services from "./Services.tsx";
 import Submit from "./Submit.tsx";
+import {FormState} from "./types.ts";
 
 const Form = (props: { currentStep: number }) => {
     const {setDisable} = useFormContext();
     const {formData, setFormData} = useDataContext();
     const step = props.currentStep;
 
-    const [formAction, setFormAction] = useState("none");
+    const [formAction, setFormAction] = useState<FormState>("none");
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();

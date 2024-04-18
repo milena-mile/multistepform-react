@@ -24,6 +24,14 @@ const Services: React.FC = () => {
         }));
     };
 
+    const checkIfChecked = (name: string, text: string) => {
+        if (formData[name]) {
+            return formData[name].includes(text);
+        } else {
+            return false;
+        }
+    }
+
     return (
         <div className="b-form_step">
             <h2 className="b-form_step-title">Our services</h2>
@@ -31,22 +39,22 @@ const Services: React.FC = () => {
             <div className="b-form_inputs">
                 <Checkbox icon={"images/development.svg"}
                           name={"services"}
-                          checked={formData["services"] ? formData["services"].includes("Development") : false}
+                          checked={checkIfChecked("services", "Development")}
                           text={"Development"}
                           onChange={handleCheckboxChange}/>
                 <Checkbox icon={"images/web-design.svg"}
                           name={"services"}
-                          checked={formData["services"] ? formData["services"].includes("Web Design") : false}
+                          checked={checkIfChecked("services", "Web Design")}
                           text={"Web Design"}
                           onChange={handleCheckboxChange}/>
                 <Checkbox icon={"images/marketing.svg"}
                           name={"services"}
-                          checked={formData["services"] ? formData["services"].includes("Marketing") : false}
+                          checked={checkIfChecked("services", "Marketing")}
                           text={"Marketing"}
                           onChange={handleCheckboxChange}/>
                 <Checkbox icon={"images/other.svg"}
                           name={"services"}
-                          checked={formData["services"] ? formData["services"].includes("Other") : false}
+                          checked={checkIfChecked("services", "Other")}
                           text={"Other"}
                           onChange={handleCheckboxChange}/>
             </div>
