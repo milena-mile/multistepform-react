@@ -9,13 +9,10 @@ const Services: React.FC = () => {
         let services = formData[name] as string[];
         if (services == undefined) services = [];
 
-        if (!services.includes(value)) {
-            services.push(value);
+        if (services.includes(value)) {
+            services = services.filter(item => item != value);
         } else {
-            const index = services.indexOf(value);
-            if (index !== -1) {
-                services.splice(index, 1);
-            }
+            services.push(value);
         }
 
         setFormData(prevData => ({
