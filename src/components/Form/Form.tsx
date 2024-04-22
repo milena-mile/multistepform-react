@@ -2,6 +2,7 @@ import "./form.scss";
 import React, {useState} from "react";
 import {useDataContext} from "../../contexts/DataContext.tsx";
 import {useFormContext} from "../../contexts/FormContext.tsx";
+import saveFormData from "../../services/sendForm.tsx";
 import Budget from "./Budget.tsx";
 import Contact from "./Contact.tsx";
 import Services from "./Services.tsx";
@@ -15,15 +16,15 @@ const Form = (props: { currentStep: number }) => {
 
     const [formAction, setFormAction] = useState<FormState>("none");
 
-    const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
+    const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
         setFormAction("loading");
 
         try {
-            localStorage.setItem('formData', JSON.stringify(formData));
+            await saveFormData(formData);
             setFormData({});
             setDisable(0);
-            setTimeout(() => setFormAction("sent"), 0);
+            setFormAction("sent");
             setTimeout(() => setFormAction("none"), 3000);
 
         } catch (error) {
