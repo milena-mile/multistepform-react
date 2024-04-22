@@ -1,0 +1,39 @@
+{
+  "inputs": {
+    "Name": {
+      "type": "text",
+      "icon": "name.svg",
+      "placeholder": "John Carter"
+    },
+    "Email": {
+      "type": "email",
+      "icon": "mail.svg",
+      "placeholder": "Email address"
+    },
+    "Phone Number": {
+      "type": "tel",
+      "icon": "phone.svg",
+      "placeholder": "(123) 456-7890"
+    },
+    "Company": {
+      "type": "text",
+      "icon": "company.svg",
+      "placeholder": "Company name"
+    }
+  },
+  "services": {
+    "Development": {
+      "icon": "images/development.svg"
+    },
+    "Web Design": {
+      "icon": "images/web-design.svg"
+    },
+    "Marketing": {
+      "icon": "images/marketing.svg"
+    },
+    "Other": {
+      "icon": "images/development.svg"
+    }
+  },
+  "budget": ["$5.000 - $10.000", "$10.000 - $20.000", "$20.000 - $50.000", "$50.000 +"]
+}
