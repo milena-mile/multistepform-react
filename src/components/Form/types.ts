@@ -1,3 +1,3 @@
-type FormState = "none" | "loading" | "sent";
+type FormState = "none" | "loading" | "sent" | "error";
 
 export type {FormState};

@@ -11,7 +11,7 @@ const Submit = (props: { formAction: string }) => {
                    value={props.formAction === "loading" ? "Submitting..." : "Submit"}
                    type="submit"
                    disabled={props.formAction === "loading"}/>
-            {props.formAction === "sent" && <span className='b-form_message'>Form has been sent!</span>}
+            {props.formAction === "sent" ? <span className='b-form_message'>Form has been sent!</span> : props.formAction === "error" && <span className='b-form_message error'>Form hasn't been sent! Try later.</span>}
         </div>
     )
 }

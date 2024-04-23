@@ -1,8 +1,11 @@
 const saveFormData = (formData: {[key: string]: string | string[]}) => {
     return new Promise((resolve, reject) => {
         try {
-            localStorage.setItem('formData', JSON.stringify(formData));
-            resolve('Form data saved successfully to localStorage');
+            const formDataStr = JSON.stringify(formData);
+            setTimeout(() => {
+                localStorage.setItem('formData', formDataStr);
+                resolve('Form data saved successfully to localStorage');
+            }, 1000);
         } catch (error) {
             reject(error);
         }

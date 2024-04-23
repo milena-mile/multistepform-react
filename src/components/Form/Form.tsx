@@ -28,6 +28,7 @@ const Form = (props: { currentStep: number }) => {
             setTimeout(() => setFormAction("none"), 3000);
 
         } catch (error) {
+            setFormAction("error");
             throw new Error("Form submission error");
         }
     }

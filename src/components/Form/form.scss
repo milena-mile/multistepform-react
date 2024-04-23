@@ -97,6 +97,10 @@
     font-size: clamp(20px, 1.4vw, 25px);
     color: green;
     font-weight: 900;
+
+    &.error {
+      color: red;
+    }
   }
 }
 
