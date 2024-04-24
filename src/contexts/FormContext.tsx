@@ -1,20 +1,22 @@
-import React, {createContext, ReactNode, useContext, useState} from 'react';
+import React, { createContext, ReactNode, useContext, useState } from 'react';
 
 interface ContextForm {
-    disable: number;
-    setDisable: React.Dispatch<React.SetStateAction<number>>;
+    disable: string[];
+    setDisable: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
+const initialDisable: string[] = [];
+
 const FormContext = createContext<ContextForm>({
-    disable: 0,
+    disable: initialDisable,
     setDisable: () => {}
 });
 
 const useFormContext = () => useContext(FormContext);
 
-const FormProvider = ({children}: { children: ReactNode }) => {
-    const [disable, setDisable] = useState(0);
-
+const FormProvider = ({ children }: { children: ReactNode }) => {
+    const [disable, setDisable] = useState(initialDisable);
+    
     return (
         <FormContext.Provider value={{disable, setDisable}}>
             {children}
@@ -22,4 +24,4 @@ const FormProvider = ({children}: { children: ReactNode }) => {
     );
 };
 
-export {useFormContext, FormProvider};
+export { useFormContext, FormProvider };

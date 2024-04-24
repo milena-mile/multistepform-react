@@ -1,14 +1,23 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDataContext} from "../../contexts/DataContext.tsx";
 import {useFormContext} from "../../contexts/FormContext.tsx";
 import {IInput} from "./types.ts";
 
-const Input: React.FC<IInput> = ({type, name, icon, placeholder}) => {
-    const {setDisable} = useFormContext();
+const Input: React.FC<IInput> = ({type, name, icon, placeholder, required}) => {
+    const {disable, setDisable} = useFormContext();
     const {formData, setFormData} = useDataContext();
 
     const [value, setValue] = useState(formData[name]);
     const [hasError, setError] = useState(false);
+
+    useEffect(() => {
+        setDisable((prevDisable: string[]) => {
+            if (required && !prevDisable.includes(name) && !formData[name]) {
+                return [...prevDisable, name];
+            }
+            return prevDisable;
+        });
+    }, []);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let formattedValue = '';
@@ -39,40 +48,44 @@ const Input: React.FC<IInput> = ({type, name, icon, placeholder}) => {
             }));
             setValue(event.target.value);
         }
-
     }
 
     const validateInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = event.target.value;
+        const name = event.target.name;
+        const required = event.target.required;
+
+        const errorField = () => {
+            setError(true);
+            if (!disable.includes(name)) setDisable(prevDisable => [...prevDisable, name]);
+        }
+    
+        const correctField = () => {
+            setError(false);
+            if (disable.includes(name)) setDisable(prevDisable => prevDisable.filter(item => item != name));
+        }
 
         if (type === "tel") {
-            if (inputValue.length != 0 && inputValue.length < 14) {
-                if (!event.target.classList.contains("error")) setDisable((disable: number) => ++disable);
-                setError(true);
-            } else {
-                setError(false);
-                setDisable((disable: number) => --disable);
-            }
+            ((required || inputValue.length != 0) && inputValue.length < 14) ? errorField() : correctField();
+
         } else if (type === "email") {
-            if (inputValue.length != 0 && !inputValue.match(/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/)) {
-                if (!event.target.classList.contains("error")) setDisable((disable: number) => ++disable);
-                setError(true);
-            } else {
-                setError(false);
-                setDisable((disable: number) => --disable);
-            }
+            ((required || inputValue.length != 0) && !inputValue.match(/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/)) ? errorField() : correctField();
+
+        } else {
+            (required && inputValue.length === 0) ? errorField() : correctField();
         }
     }
 
     return (
         <label className="b-form_label">
-            <span className="b-form_label-text">{name}</span>
+            <span className="b-form_label-text">{`${name}${required ? '*' : ''}`}</span>
             <input
                 className={`b-form_input ${hasError ? 'error' : ''}`}
                 type={type}
                 placeholder={placeholder}
                 value={value}
-                name={name}
+                name={name} 
+                required={required}
                 onChange={handleInputChange}
                 onBlur={validateInput}/>
             <img className="b-form_icon" src={`images/${icon}`} alt={name}/>
