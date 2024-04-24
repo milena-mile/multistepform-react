@@ -7,8 +7,8 @@ const Button = (props: ButtonProps) => {
     const {disable} = useFormContext();
 
     return (
-        <button className={`b-button_${props.type} ${disable > 0 ? "error" : ""}`}
-                disabled={disable > 0}
+        <button className={`b-button_${props.type} ${disable.length > 0 ? "error" : ""}`}
+                disabled={disable.length > 0}
                 onClick={props.onClick}>
             {props.text}
         </button>

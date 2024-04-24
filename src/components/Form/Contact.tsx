@@ -15,6 +15,7 @@ const Contact: React.FC = () => {
                         <Input name={key}
                                type={value.type}
                                icon={value.icon}
+                               required={value.required}
                                placeholder={value.placeholder}
                                key={key}/>
                     )

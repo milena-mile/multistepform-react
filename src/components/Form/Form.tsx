@@ -23,7 +23,7 @@ const Form = (props: { currentStep: number }) => {
         try {
             await saveFormData(formData);
             setFormData({});
-            setDisable(0);
+            setDisable([]);
             setFormAction("sent");
             setTimeout(() => setFormAction("none"), 3000);
 

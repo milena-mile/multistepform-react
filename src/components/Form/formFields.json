@@ -3,22 +3,26 @@
     "Name": {
       "type": "text",
       "icon": "name.svg",
-      "placeholder": "John Carter"
+      "placeholder": "John Carter",
+      "required": true
     },
     "Email": {
       "type": "email",
       "icon": "mail.svg",
-      "placeholder": "Email address"
+      "placeholder": "Email address",
+      "required": true
     },
     "Phone Number": {
       "type": "tel",
       "icon": "phone.svg",
-      "placeholder": "(123) 456-7890"
+      "placeholder": "(123) 456-7890",
+      "required": false
     },
     "Company": {
       "type": "text",
       "icon": "company.svg",
-      "placeholder": "Company name"
+      "placeholder": "Company name",
+      "required": false
     }
   },
   "services": {
